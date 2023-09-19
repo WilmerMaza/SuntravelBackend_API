@@ -17,21 +17,12 @@
 //     =====`-.____`.___ \_____/___.-`___.-'=====
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-import { conn } from "./src/db";
-import app from "./src/app";
+const server = require('./src/app.js');
+const { conn } = require('./src/db.js');
 
-// Syncing all the models with the database.
-conn.sync().then(() => {
-  const port = 3002;
-  app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+// Syncing all the models at once.
+conn.sync({ force: true }).then(() => {
+  server.listen(3002, () => {
+    console.log('%s listening at 3002'); // eslint-disable-line no-console
   });
 });
-
-
-// conn.sync({ force: true }).then(() => {
-//   const port = 3002;
-//   app.listen(port, () => {
-//     console.log(`Server is running on port ${port}`);
-//   });
-// });
