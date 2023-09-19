@@ -1,5 +1,5 @@
 
-const formatDate = (numberDay:any) => {
+const formatDate = (numberDay) => {
         if(numberDay === 0) {
             const fecha = new Date();
             return format(fecha)
@@ -11,7 +11,7 @@ const formatDate = (numberDay:any) => {
         }
 }
 
-const format = (fecha:any) => {
+const format = (fecha) => {
     const año = fecha.getFullYear();
     const mes = String(fecha.getMonth() + 1).padStart(2, '0'); // Agrega un cero al mes si es necesario
     const dia = String(fecha.getDate()).padStart(2, '0'); // Agrega un cero al día si es necesario
