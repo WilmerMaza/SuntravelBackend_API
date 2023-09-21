@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -L",
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
     "test": "jest --detectOpenHandles",
     "grade": "jest --useStderr --detectOpenHandles --json --outputFile=./test/result.json"
   },
@@ -25,6 +26,7 @@
     "jest": "^28.1.0",
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
+    "mysql2": "^3.6.1",
     "node-fetch": "^2.6.7",
     "pg": "^8.5.1",
     "request": "^2.88.2",
