@@ -1,35 +1,51 @@
 const { v1 } = require("uuid");
 const { AES, enc } = require("crypto-ts");
+const { User, Roll, Login } = require("../models/Asociaciones");
 require("dotenv").config({ path: "../../.env" });
 const { SECRETKEY } = process.env;
-const { Users, RollSettings, TableLogins } = require("../db.js");
 
 const register_function = async (dataBody) => {
   const { email, username, name, password, roll } = dataBody;
-
   const pass = AES.decrypt(password, enc.Utf8.parse(SECRETKEY)).toString(
     enc.Utf8
   );
-  const user = await Users.create({
-    ID: v1(),
-    email,
-    username,
-    name
-  });
 
-  const rollSetting = await RollSettings.create({
-    ID: v1(),
-    account: roll,
-    usuario: user.ID,
-  });
+  try {
+    // Crear el usuario
+    const user = await User.create({
+      ID: v1(),
+      email,
+      username,
+      name,
+    });
+  } catch (error) {
+    throw new Error("Error al crear el usuario: " + error.original.code);
+  }
 
-  await TableLogins.create({
-    ID: v1(),
-    user: username,
-    password: pass,
-    RollSettingID: rollSetting.ID,
-  });
+  try {
+    // Crear la configuración de roles
+    const rollSetting = await Roll.create({
+      ID: v1(),
+      account: roll,
+      userId: user.ID,
+    });
+  } catch (error) {
+    throw new Error("Error al crear la configuración de roles: " + error.original.code);
+  }
 
+  try {
+    // Crear el registro de inicio de sesión
+    const login = await Login.create({
+      ID: v1(),
+      user: username,
+      password: pass,
+      rollId: rollSetting.ID,
+    });
+  } catch (error) {
+    throw new Error("Error al crear el registro de inicio de sesión: " + error.original.code);
+  }
+
+  return { user, rollSetting, login };
 };
 
 module.exports = { register_function };

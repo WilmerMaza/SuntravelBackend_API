@@ -2,10 +2,7 @@ const { Router } = require("express");
 const jwt = require("jsonwebtoken");
 require("dotenv").config({ path: "../../.env" });
 
-const {
-  login_function,
-  user_function,
-} = require("../Services/LoginService.js");
+const { login_function } = require("../Services/LoginService.js");
 
 const { JWT_STRING, JWT_EXPIRED } = process.env;
 const router = Router();
@@ -14,16 +11,16 @@ const router = Router();
 
 router.post("/", async (req, res) => {
   const { Name, Password } = req.body;
-  const dataBd = await login_function(Name, Password);
-  if (dataBd) {
+
+  try {
+    const dataBd = await login_function(Name, Password);
+
     let dataUser;
-    const {
-      RollSetting: { account },
-    } = dataBd.dataValues;
 
     const {
       RollSetting: {
-        SportsInstitution: { dataValues },
+        account,
+        User: { dataValues },
       },
     } = dataBd.dataValues;
 
@@ -35,13 +32,19 @@ router.post("/", async (req, res) => {
       JWT_STRING,
       { expiresIn: JWT_EXPIRED },
       (error, token) => {
-        res.json({
+        res.status(200).json({
           token,
         });
       }
     );
-  } else {
-    res.status(401).send("user not found");
+  } catch (error) {
+    const response = {
+      isLogin: false,
+      msg: "We have detected an error when Login",
+      error: error.message, // Puedes acceder al mensaje de error
+    };
+
+    res.status(401).send(response);
   }
 });
 
