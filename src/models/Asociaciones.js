@@ -1,6 +1,7 @@
 const User = require("./UserModel");
 const Roll = require("./RollModel");
 const Login = require("./LoginModel");
+const servicios = require("./sevicios")
 
 // Definir la relación uno a uno (hasOne) entre User y Roll
 User.hasOne(Roll, { foreignKey: "userId" });
@@ -13,5 +14,5 @@ Login.belongsTo(Roll, { foreignKey: "rollId" });
 module.exports = {
   User,
   Roll,
-  Login
+  Login, servicios
 };
