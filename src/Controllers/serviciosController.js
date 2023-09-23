@@ -2,7 +2,7 @@ const { Router } = require("express");
 const { crearServicio, mostrarServicio,} = require("../Services/servicioService.js");
 const router = Router();
 
-router.post("/create", async (req, res) => {
+router.post("/createService", async (req, res) => {
   const dataFull = { ...req.body };
   try {
 
@@ -24,7 +24,7 @@ router.post("/create", async (req, res) => {
   }
   
 });
-router.get("/MostrarServicio", async (req, res) => {
+router.get("/getServicio", async (req, res) => {
   const dataFull = { ...req.body };
   try {
 
