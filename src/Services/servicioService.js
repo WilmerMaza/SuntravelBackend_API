@@ -1,7 +1,7 @@
 const  servicios  = require("../models/sevicios");
 const { v1 } = require("uuid");
 
-const Nuevoservicio = async (dataBody) => {
+const CrearServicio = async (dataBody) => {
     const { estado, precio_adulto, precio_niño, hora_inicio, duracion, lugar, descripcion, galeria, salida_horarios } = dataBody;
 
     try {
@@ -19,14 +19,14 @@ const Nuevoservicio = async (dataBody) => {
         });
 
     } catch (error) {
-        throw new error("servicio no resgistrado");
+        throw new error("servicio no resgistrado"+error);
     }
  
     
  
 
 };
-const mostrarservicio = async (dataBody)=>{
+const MostrarServicio = async (dataBody)=>{
     const { estado, precio_adulto, precio_niño, hora_inicio, duracion, lugar, descripcion, galeria, salida_horarios } = dataBody;
     try {
    
@@ -45,7 +45,7 @@ const mostrarservicio = async (dataBody)=>{
         return Mostrar;
 
      } catch (error) {
-        throw new Error ("busqueda no encontrada")
+        throw new Error ("busqueda no encontrada"+error)
        
      
      }
@@ -68,4 +68,4 @@ const mostrarservicio = async (dataBody)=>{
 
 
 
-module.exports = { Nuevoservicio,mostrarservicio};
+module.exports = { CrearServicio,MostrarServicio};

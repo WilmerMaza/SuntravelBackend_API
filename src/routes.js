@@ -10,7 +10,7 @@ const router = Router();
 
 router.use("/login", LoginRoutes);
 router.use("/register", RegisterRoutes);
-router.use("/servicios",servicioRoutes);
+router.use("/servicios",verificationToken,servicioRoutes);
 
 
 

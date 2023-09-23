@@ -1,12 +1,12 @@
 const { Router } = require("express");
-const { Nuevoservicio, mostrarservicio,actualizarservicio} = require("../Services/servicioService.js");
+const { CrearServicio, MostrarServicio,CrearServicio} = require("../Services/servicioService.js");
 const router = Router();
 
 router.post("/create", async (req, res) => {
   const dataFull = { ...req.body };
   try {
 
-    await Nuevoservicio(dataFull);
+    await CrearServicio(dataFull);
     const response = {
       isRegister: true,
       msg: "Your activity was created successfully"
@@ -24,12 +24,12 @@ router.post("/create", async (req, res) => {
   }
   
 });
-router.get("/mostrar", async (req, res) => {
+router.get("/MostrarServicio", async (req, res) => {
   const dataFull = { ...req.body };
   try {
 
-  const hola =  await mostrarservicio(dataFull);
-  res.status(200).send(hola);
+  const MostrarServicios =  await MostrarServicio(dataFull);
+  res.status(200).send(MostrarServicios);
 
   
   } catch (error) {
