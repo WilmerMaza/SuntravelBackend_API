@@ -24,7 +24,7 @@ router.post("/createService", async (req, res) => {
   }
   
 });
-router.get("/getServicio", async (req, res) => {
+router.get("/getServicice", async (req, res) => {
   const dataFull = { ...req.body };
   try {
 
