@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { crearServicio, mostrarServicio, actualizarservicio, deleteService } = require("../Services/servicioService.js");
+const { createService, getServicice, updateService, deleteService } = require("../Services/servicioService.js");
 const router = Router();
 
 router.post("/createService", async (req, res) => {
@@ -28,8 +28,8 @@ router.get("/getServicice", async (req, res) => {
   const dataFull = { ...req.body };
   try {
 
-    const getServicice = await getServicice(dataFull);
-    res.status(200).send(getServicice);
+    const actualizarservicio = await getServicice(dataFull);
+    res.status(200).send(actualizarservicio);
 
 
   } catch (error) {
