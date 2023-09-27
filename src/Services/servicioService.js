@@ -9,6 +9,7 @@ const deleteService = async ({ id }) => {
         return result
 
     } catch (error) {
+        throw new error("servicio no eliminado" + error);
 
     }
 }
@@ -43,9 +44,9 @@ const getServicice = async (dataBody) => {
 
     try {
 
-        const mostrar = await servicios.findAll({
+        const mostrar = await servicios.findAll(
 
-        });
+        );
         return mostrar;
 
     } catch (error) {
@@ -54,27 +55,7 @@ const getServicice = async (dataBody) => {
 
     }
 
-};
-
-
-// const actualizarservicio= async(da)=>{
-
-//     try {
-
-//      const result=await servicios.update({
-//           where: { ID: id },
-//           data: {
-
-//           }
-
-//      })
-
-//      return result
-
-//     } catch (error) {
-
-//     }
-//   }
+}
 
 const updateService = async (dataBody) => {
     try {
