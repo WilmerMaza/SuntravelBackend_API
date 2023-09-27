@@ -10,9 +10,10 @@ const register_function = async (dataBody) => {
     enc.Utf8
   );
 
+  let user, rollSetting, login
   try {
     // Crear el usuario
-    const user = await User.create({
+     user = await User.create({
       ID: v1(),
       email,
       username,
@@ -24,7 +25,7 @@ const register_function = async (dataBody) => {
 
   try {
     // Crear la configuración de roles
-    const rollSetting = await Roll.create({
+     rollSetting = await Roll.create({
       ID: v1(),
       account: roll,
       userId: user.ID,
@@ -35,7 +36,7 @@ const register_function = async (dataBody) => {
 
   try {
     // Crear el registro de inicio de sesión
-    const login = await Login.create({
+     login = await Login.create({
       ID: v1(),
       user: username,
       password: pass,
