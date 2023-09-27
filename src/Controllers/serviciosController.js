@@ -28,7 +28,7 @@ router.get("/getServicice", async (req, res) => {
   const dataFull = { ...req.body };
   try {
 
-    const mostrarServicios = await getServicice(dataFull);
+    const getServicice = await getServicice(dataFull);
     res.status(200).send(getServicice);
 
 
