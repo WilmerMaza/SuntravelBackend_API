@@ -43,7 +43,7 @@ router.get("/getServicice", async (req, res) => {
 
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/delete/:id", async (req, res) => {
   const { id } = req.params;
   try {
     await deleteService({ id });
@@ -59,7 +59,7 @@ router.delete("/:id", async (req, res) => {
   }
 
 })
-router.put("/:id", async (req, res) => {
+router.put("/actualizar/:id", async (req, res) => {
   const id = req.params;
   const dataFull = { ...req.body };
   const dataComplete = { ...id, ...dataFull }
