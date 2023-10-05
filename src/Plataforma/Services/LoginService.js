@@ -1,5 +1,5 @@
 const { AES, enc } = require("crypto-ts");
-const { User, Roll, Login } = require("../models/Asociaciones");
+const { User, Roll, Login } = require("../../models/Asociaciones");
 
 const login_function = async (Name, Password) => {
   const { SECRETKEY } = process.env;

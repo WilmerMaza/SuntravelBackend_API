@@ -58,7 +58,7 @@ const puerto = PORT ? PORT : 3002;
 
 server.listen(puerto, () => {
   console.log(`Server listening on port ${puerto}`);
-  mysqldb.sync({ force: false });
+  mysqldb.sync({ force: true });
 });
 
 module.exports = server;

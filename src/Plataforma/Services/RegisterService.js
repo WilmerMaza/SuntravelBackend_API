@@ -1,6 +1,6 @@
 const { v1 } = require("uuid");
 const { AES, enc } = require("crypto-ts");
-const { User, Roll, Login } = require("../models/Asociaciones");
+const { User, Roll, Login } = require("../../models/Asociaciones");
 require("dotenv").config({ path: "../../.env" });
 const { SECRETKEY } = process.env;
 

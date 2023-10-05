@@ -1,23 +1,14 @@
-const mysqldb = require("../db");
 const { DataTypes } = require("sequelize");
-const Roll = require("./RollModel");
+const mysqldb = require("../../db");
 
-const User = mysqldb.define("Users", {
+const Tservicio = mysqldb.define("Tservicio", {
   ID: {
-    type: DataTypes.STRING,
+    type: DataTypes.UUID,
     primaryKey: true,
     unique: true,
     allowNull: false,
   },
-  email: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
-    validate: {
-      isEmail: true,
-    },
-  },
-  username: {
+  codigo: {
     type: DataTypes.STRING,
     allowNull: false,
     unique: true,
@@ -25,7 +16,14 @@ const User = mysqldb.define("Users", {
   name: {
     type: DataTypes.STRING,
     allowNull: false,
+    unique: true,
+  },
+  describe: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: false,
   },
 });
+// defino el modelo
 
-module.exports = User;
+module.exports = Tservicio;
