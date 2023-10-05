@@ -1,4 +1,4 @@
-const mysqldb = require("../db");
+const mysqldb = require("../../db");
 const { DataTypes } = require("sequelize"); // Importa DataTypes correctamente
 const User = require("./UserModel");
 

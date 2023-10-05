@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { register_function } = require("../Services/RegisterService.js");
-const { verificationToken } = require("../Utils/validateToken.js");
+const { verificationToken } = require("../../Utils/validateToken.js");
 
 const router = Router();
 

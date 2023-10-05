@@ -24,6 +24,7 @@ router.post("/createService", async (req, res) => {
   }
 
 });
+
 router.get("/getServicice", async (req, res) => {
   const dataFull = { ...req.body };
   try {
@@ -59,6 +60,7 @@ router.delete("/delete/:id", async (req, res) => {
   }
 
 })
+
 router.put("/actualizar/:id", async (req, res) => {
   const id = req.params;
   const dataFull = { ...req.body };

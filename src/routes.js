@@ -1,9 +1,9 @@
 const { Router } = require("express");
 const { verificationToken } = require("./Utils/validateToken.js");
-const LoginRoutes = require("./Controllers/LoginController.js");
-const RegisterRoutes = require("./Controllers/RegisterController.js");
-const servicioRoutes= require ("./Controllers/serviciosController.js")
-
+const LoginRoutes = require("./Plataforma/Controllers/LoginController.js");
+const RegisterRoutes = require("./Plataforma/Controllers/RegisterController.js");
+const servicioRoutes= require ("./Servicios/Controllers/serviciosController.js")
+const categoriaRoutes= require ("./Categorias/Controllers/CategoriasController.js")
 
 
 const router = Router();
@@ -11,6 +11,7 @@ const router = Router();
 router.use("/login", LoginRoutes);
 router.use("/register", RegisterRoutes);
 router.use("/servicios",verificationToken,servicioRoutes);
+router.use("/categoria",verificationToken,categoriaRoutes);
 
 
 
