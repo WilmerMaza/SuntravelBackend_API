@@ -1,12 +1,12 @@
 const { Router } = require("express");
-const { crearServicio, mostrarServicio,} = require("../Services/servicioService.js");
+const { createService, getServicice, updateService, deleteService } = require("../Services/servicioService.js");
 const router = Router();
 
 router.post("/createService", async (req, res) => {
   const dataFull = { ...req.body };
   try {
 
-    await crearServicio(dataFull);
+    await createService(dataFull);
     const response = {
       isRegister: true,
       msg: "Your activity was created successfully"
@@ -22,16 +22,16 @@ router.post("/createService", async (req, res) => {
     };
     res.status(400).send(response);
   }
-  
+
 });
 router.get("/getServicice", async (req, res) => {
   const dataFull = { ...req.body };
   try {
 
-  const mostrarServicios =  await mostrarServicio(dataFull);
-  res.status(200).send(mostrarServicios);
+    const actualizarservicio = await getServicice(dataFull);
+    res.status(200).send(actualizarservicio);
 
-  
+
   } catch (error) {
     const response = {
       isRegister: false,
@@ -43,7 +43,40 @@ router.get("/getServicice", async (req, res) => {
 
 });
 
+router.delete("/delete/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    await deleteService({ id });
+    res.status(200).send()
 
+  } catch (error) {
+    const response = {
+      isRegister: false,
+      msg: "We have detected an error when registering",
+      error: error.message, // Utiliza error.message para obtener el mensaje de error
+    };
+    res.status(400).send(response);
+  }
+
+})
+router.put("/actualizar/:id", async (req, res) => {
+  const id = req.params;
+  const dataFull = { ...req.body };
+  const dataComplete = { ...id, ...dataFull }
+  try {
+    await updateService(dataComplete);
+    res.status(200).send("actualizacion exitosa")
+
+  } catch (error) {
+    const response = {
+      isRegister: false,
+      msg: "No se actualizo",
+      error: error.message, // Utiliza error.message para obtener el mensaje de error
+    };
+    res.status(400).send(response);
+  }
+
+})
 
 
 

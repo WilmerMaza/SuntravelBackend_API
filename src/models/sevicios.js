@@ -3,6 +3,7 @@
 const { DataTypes } = require("sequelize");
 const mysqldb = require("../db");
 
+
 const servicio = mysqldb.define("Servicios", {
     ID: {
         type: DataTypes.UUID,
@@ -56,6 +57,7 @@ const servicio = mysqldb.define("Servicios", {
         allowNull: true,
         unique: false,
     }
+   
 });
 // defino el modelo
 

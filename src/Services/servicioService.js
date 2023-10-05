@@ -1,7 +1,21 @@
-const  servicios  = require("../models/sevicios");
+const servicio = require("../models/sevicios");
+const servicios = require("../models/sevicios");
 const { v1 } = require("uuid");
 
-const crearServicio = async (dataBody) => {
+const deleteService = async ({ id }) => {
+
+    try {
+        const result = await servicios.destroy({ where: { ID: id } })
+        return result
+
+    } catch (error) {
+        throw new error("servicio no eliminado" + error);
+
+    }
+}
+
+const createService = async (dataBody) => {
+
     const { estado, precio_adulto, precio_niño, hora_inicio, duracion, lugar, descripcion, galeria, salida_horarios } = dataBody;
 
     try {
@@ -19,40 +33,43 @@ const crearServicio = async (dataBody) => {
         });
 
     } catch (error) {
-        throw new error("servicio no resgistrado"+error);
+        throw new error("servicio no resgistrado" + error);
     }
- 
-    
- 
+
+
+
 
 };
-const mostrarServicio = async (dataBody)=>{
-    const { estado, precio_adulto, precio_niño, hora_inicio, duracion, lugar, descripcion, galeria, salida_horarios } = dataBody;
+const getServicice = async (dataBody) => {
+
     try {
-   
-        const mostrar= await servicios.findAll({
-             ID: v1(),
-             estado,
-             precio_adulto,
-             precio_niño,
-             hora_inicio,
-             duracion,
-             lugar,
-             descripcion,
-             galeria,
-             salida_horarios,
-         });
+
+        const mostrar = await servicios.findAll(
+
+        );
         return mostrar;
 
-     } catch (error) {
-        throw new Error ("busqueda no encontrada"+error)
-       
-     
-     }
-
-};
+    } catch (error) {
+        throw new Error("busqueda no encontrada" + error)
 
 
+    }
+
+}
+
+const updateService = async (dataBody) => {
+    try {
+        const rowsUpdated = await servicio.update(dataBody, {
+            where: { ID: dataBody.id }
+        });
+        if (rowsUpdated[0] === 0) return 'No se actualizó ningún registro';
+        else return " actualizado con éxito";
+
+    } catch (error) {
+        console.error("Error al actualizar ", error);
+        throw error;
+    }
+}
 
 
 
@@ -67,5 +84,4 @@ const mostrarServicio = async (dataBody)=>{
 
 
 
-
-module.exports = { crearServicio,mostrarServicio};
+module.exports = { createService, getServicice, updateService, deleteService };
