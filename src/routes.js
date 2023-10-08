@@ -2,9 +2,9 @@ const { Router } = require("express");
 const { verificationToken } = require("./Utils/validateToken.js");
 const LoginRoutes = require("./Plataforma/Controllers/LoginController.js");
 const RegisterRoutes = require("./Plataforma/Controllers/RegisterController.js");
-const servicioRoutes= require ("./Servicios/Controllers/serviciosController.js")
-const categoriaRoutes= require ("./Categorias/Controllers/CategoriasController.js")
-
+const servicioRoutes= require ("./Servicios/Controllers/serviciosController.js");
+const categoriaRoutes= require ("./Categorias/Controllers/CategoriasController.js");
+const subirImagenRoutes=require("./subirImagen/controllers/subirController.js");
 
 const router = Router();
 
@@ -12,6 +12,10 @@ router.use("/login", LoginRoutes);
 router.use("/register", RegisterRoutes);
 router.use("/servicios",verificationToken,servicioRoutes);
 router.use("/categoria",verificationToken,categoriaRoutes);
+router.use("/subirImagen",subirImagenRoutes);
+// Para configurar express.static
+
+
 
 
 
