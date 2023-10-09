@@ -5,6 +5,8 @@ const RegisterRoutes = require("./Plataforma/Controllers/RegisterController.js")
 const servicioRoutes= require ("./Servicios/Controllers/serviciosController.js");
 const categoriaRoutes= require ("./Categorias/Controllers/CategoriasController.js");
 const subirImagenRoutes=require("./subirImagen/controllers/subirController.js");
+const destinosRoutes= require ("./Destinos/Controllers/DestinosController.js")
+const tserviciosRoutes= require ("./Tservicios/Controllers/TserviciosController.js")
 
 const router = Router();
 
@@ -13,10 +15,8 @@ router.use("/register", RegisterRoutes);
 router.use("/servicios",verificationToken,servicioRoutes);
 router.use("/categoria",verificationToken,categoriaRoutes);
 router.use("/subirImagen",subirImagenRoutes);
-// Para configurar express.static
-
-
-
+router.use("/destinos",verificationToken,destinosRoutes);
+router.use("/TipoServicios",verificationToken,tserviciosRoutes);
 
 
 router.use("*", (req, res) => {

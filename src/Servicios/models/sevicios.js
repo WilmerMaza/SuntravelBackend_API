@@ -23,11 +23,6 @@ const servicio = mysqldb.define("Servicios", {
     allowNull: false,
     unique: false,
   },
-  destino: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: false,
-  },
   precio_adulto: {
     type: DataTypes.STRING,
     allowNull: true,

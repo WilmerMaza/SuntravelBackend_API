@@ -1,3 +1,4 @@
+const { Destino, categoria, Tservicio } = require("../../models/Asociaciones");
 const servicios = require("../models/sevicios");
 const { v1 } = require("uuid");
 
@@ -26,7 +27,7 @@ const createService = async (dataBody) => {
     descripcion,
     galeria,
     salida_horarios,
-    recomendaciones
+    recomendaciones,
   } = dataBody;
 
   try {
@@ -34,10 +35,7 @@ const createService = async (dataBody) => {
       ID: v1(),
       name,
       codigo,
-    //   tipoServicio:"",
       estado,
-    //   categoria:"",
-      destino,
       precio_adulto,
       precio_nino,
       hora_inicio,
@@ -46,15 +44,34 @@ const createService = async (dataBody) => {
       descripcion,
       galeria,
       salida_horarios,
-      recomendaciones
+      recomendaciones,
+      destinoId: destino,
+      tservicioId: tipoServicio,
+      categoriaId: categoria,
     });
   } catch (error) {
     throw new error("servicio no resgistrado" + error);
   }
 };
-const getServicice = async (dataBody) => {
+const getServicice = async () => {
   try {
-    const mostrar = await servicios.findAll();
+    const mostrar = await servicios.findAll({
+      include: [
+        { model: Destino, attributes: ["ID", "codigo", "name"] },
+        { model: Tservicio, attributes: ["ID", "codigo", "name"] },
+        { model: categoria, attributes: ["ID", "codigo", "name"] },
+      ],
+    });
+    return mostrar;
+  } catch (error) {
+    throw new Error("busqueda no encontrada" + error);
+  }
+};
+
+const getFindServicice = async (dataFull) => {
+  const { servicioID } = dataFull;
+  try {
+    const mostrar = await servicios.findByPk(servicioID);
     return mostrar;
   } catch (error) {
     throw new Error("busqueda no encontrada" + error);
@@ -74,4 +91,10 @@ const updateService = async (dataBody) => {
   }
 };
 
-module.exports = { createService, getServicice, updateService, deleteService };
+module.exports = {
+  createService,
+  getServicice,
+  updateService,
+  deleteService,
+  getFindServicice,
+};

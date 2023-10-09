@@ -29,21 +29,6 @@ server.use((req, res, next) => {
   next();
 });
 
-server.use((req, res, next) => {
-  if (req.headers.authorization) {
-    const token = req.headers.authorization.split(" ")[1]; // Obtiene el token del encabezado Authorization
-    try {
-      const decodedToken = jwt.decode(token);
-      req.user = decodedToken;
-      next();
-    } catch (error) {
-      res.status(401).json({ message: "Autenticación fallida" });
-    }
-  } else {
-    next();
-  }
-});
-
 server.use("/", routes);
 
 server.use((err, req, res, next) => {
@@ -58,7 +43,7 @@ const puerto = PORT ? PORT : 3002;
 
 server.listen(puerto, () => {
   console.log(`Server listening on port ${puerto}`);
-  mysqldb.sync({ force: true });
+  mysqldb.sync({ force: false });
 });
 
 module.exports = server;
