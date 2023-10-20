@@ -5,6 +5,8 @@ const {
   updateService,
   deleteService,
   getFindServicice,
+  getFindService,
+  getFindServicesID
 } = require("../Services/servicioService.js");
 const router = Router();
 
@@ -46,7 +48,22 @@ router.get("/getServicice", async (req, res) => {
 router.post("/getfindServicice", async (req, res) => {
   const dataFull = { ...req.body };
   try {
-    const servicio = await getFindServicice(dataFull);
+    const servicio = await getFindServicesID(dataFull);
+    res.status(200).send(servicio);
+  } catch (error) {
+    const response = {
+      isRegister: false,
+      msg: "We have detected an error when registering",
+      error: error.message, // Utiliza error.message para obtener el mensaje de error
+    };
+    res.status(400).send(response);
+  }
+});
+
+router.post("/getServiciceWeb", async (req, res) => {
+  const dataFull = req.body ;
+  try {
+    const servicio = await getFindService(dataFull);
     res.status(200).send(servicio);
   } catch (error) {
     const response = {

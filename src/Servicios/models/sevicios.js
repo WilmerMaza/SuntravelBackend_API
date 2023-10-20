@@ -49,25 +49,45 @@ const servicio = mysqldb.define("Servicios", {
     unique: false,
   },
   descripcion: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(2000),
     allowNull: true,
     unique: false,
   },
   galeria: {
+    type: DataTypes.STRING(1000),
+    allowNull: true,
+    unique: false,
+  },
+  salida_horario: {
     type: DataTypes.STRING,
     allowNull: true,
     unique: false,
   },
-  salida_horarios: {
-    type: DataTypes.STRING,
-    allowNull: true,
-    unique: false,
-  }, 
   recomendaciones: {
     type: DataTypes.STRING,
     allowNull: true,
     unique: false,
-  }
+  },
+  informacion_Adicional: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    unique: false,
+  },
+  terminos_condiciones: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    unique: false,
+  },
+  incluye: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    unique: false,
+  },
+  no_incluye: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    unique: false,
+  },
 });
 // defino el modelo
 

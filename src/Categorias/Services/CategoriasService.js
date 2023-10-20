@@ -1,3 +1,4 @@
+const { Tservicio } = require("../../models/Asociaciones");
 const categorias = require("../models/Categoria");
 
 const getCategorias = async () => {
@@ -9,6 +10,35 @@ const getCategorias = async () => {
   }
 };
 
+const getCategoriasPK = async () => {
+  try {
+    const mostrar = await Tservicio.findAll({
+      include: [
+        {
+          model: categorias,
+        },
+      ],
+    });
 
+    const categoriasAgrupadas = {};
 
-module.exports = {  getCategorias};
+    // Recorremos el arreglo original de datos
+    mostrar.forEach((item) => {
+      const { name, Categorium } = item;
+      const categoriaServicio = Categorium.name; // Nombre de la categoría de servicio
+
+      // Si la categoría aún no existe en el objeto, la creamos con un arreglo vacío
+      if (!categoriasAgrupadas[name]) {
+        categoriasAgrupadas[name] = [];
+      }
+
+      // Agregamos el elemento actual al arreglo de la categoría
+      categoriasAgrupadas[name].push(categoriaServicio);
+    });
+    return categoriasAgrupadas;
+  } catch (error) {
+    throw new Error("busqueda no encontrada" + error);
+  }
+};
+
+module.exports = { getCategorias, getCategoriasPK };

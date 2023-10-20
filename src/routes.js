@@ -12,11 +12,11 @@ const router = Router();
 
 router.use("/login", LoginRoutes);
 router.use("/register", RegisterRoutes);
-router.use("/servicios",verificationToken,servicioRoutes);
-router.use("/categoria",verificationToken,categoriaRoutes);
+router.use("/servicios",servicioRoutes);
+router.use("/categoria",categoriaRoutes);
 router.use("/subirImagen",subirImagenRoutes);
-router.use("/destinos",verificationToken,destinosRoutes);
-router.use("/TipoServicios",verificationToken,tserviciosRoutes);
+router.use("/destinos",destinosRoutes);
+router.use("/TipoServicios",tserviciosRoutes);
 
 
 router.use("*", (req, res) => {
