@@ -19,11 +19,11 @@ console.error = (message) => {
 };
 
 const login_function = async (Name, Password) => {
-  console.log(global.SECRETKEY);
+  
   const pass = AES.decrypt(Password, enc.Utf8.parse(global.SECRETKEY)).toString(
     enc.Utf8
   );
-  console.log(pass);
+
   try {
     const dataBd = await Login.findOne({
       where: {
